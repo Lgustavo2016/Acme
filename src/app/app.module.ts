@@ -14,6 +14,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ProductDetailComponent } from './products/product.detail.component'
 import { WelcomeComponent } from './home/welcome.component';
 import { RouterModule } from '@angular/router';
+import { ProductDetailGuard } from './products/product-detail.guard';
 
 @NgModule({
   // This metadata defines which of our components are part of this module
@@ -35,7 +36,9 @@ import { RouterModule } from '@angular/router';
     //We use Router module to define the routes of our application
     RouterModule.forRoot([
       { path: 'products', component: ProductListComponent },
-      { path: 'products/:id', component: ProductDetailComponent },
+      { path: 'products/:id',
+      canActivate:[ProductDetailGuard],
+      component: ProductDetailComponent },
       { path: 'welcome', component: WelcomeComponent },
       { path: '', redirectTo: 'welcome', pathMatch: 'full' },
       { path: '**', redirectTo: 'welcome', pathMatch: 'full' }
